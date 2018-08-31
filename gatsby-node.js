@@ -1,6 +1,7 @@
 
  const path = require('path');
  const _ = require('lodash');
+const { createFilePath } = require('gatsby-source-filesystem')
 
  exports.createPages = ({ actions, graphql }) => {
    const { createPage } = actions;
@@ -12,15 +13,15 @@
      {
        allMarkdownRemark(
          sort: { order: DESC, fields: [frontmatter___date] }
-         limit: 2000
+         limit: 1000
        ) {
          edges {
            node {
-             excerpt(pruneLength: 250)
-             html
+             fields{
+               slug
+             }
              frontmatter {
                tags
-               date
                path
              }
            }
@@ -34,12 +35,19 @@
 
     const posts = result.data.allMarkdownRemark.edges;
 
-    posts.forEach(({ node }) => {
-      if (!_.get(node, "frontmatter.tags", false)) {
-       
+    _.each(posts, (post, index) => {
+      if (!_.get(post, "node.frontmatter.tags", false)) {
+        const previous = index === posts.length - 1 ? null : posts[index + 1].node;
+        const next = index === 0 ? null : posts[index - 1].node;
+        console.log(post.node.fields.slug)
         createPage({
-          path: `/${node.frontmatter.path}/`,
+          path: post.node.fields.slug,
           component: blogPostTemplate,
+          context: {
+            slug: post.node.fields.slug,
+            previous,
+            next,
+          }
         });
       }
     });
@@ -64,6 +72,18 @@
       });
     });
   });
+}
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const slug = createFilePath({ node, getNode })
+    createNodeField({
+      name: `slug`,
+      node,
+      value: slug,
+    })
+  }
 }
 
 
