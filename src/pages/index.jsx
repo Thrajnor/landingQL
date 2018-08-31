@@ -1,55 +1,33 @@
-import React from "react";
-// import LandingPage from "pages/LandingPage/LandingPage";
-// import withRoot from '../withRoot';
-import Link from "gatsby-link";
+import React from 'react';
+import withRoot from '../withRoot';
+import Link from 'gatsby-link';
+import Button from 'components/CustomButtons/Button';
+import Grid from '@material-ui/core/Grid';
 
-// class Index extends React.Component {
-//   render() {
-//     return (
-//         <LandingPage></LandingPage>
-//     );
-//   }
-// }
-
-// export default withRoot(Index);
-
-// import '../css/index.css'; // add some style if you want!
-
-export default function Index({ data }) {
-  const { edges: posts } = data.allMarkdownRemark;
-  return (
-    <div className="blog-posts">
-      {posts
-        .filter(post => post.node.frontmatter.title.length > 0)
-        .map(({ node: post }) => {
-          return (
-            <div className="blog-post-preview" key={post.id}>
-              <h1>
-                <Link to={post.frontmatter.path}>{post.frontmatter.title}</Link>
-              </h1>
-              <h2>{post.frontmatter.date}</h2>
-              <p>{post.excerpt}</p>
-            </div>
-          );
-        })}
-    </div>
-  );
+class Index extends React.Component {
+  render() {
+    return (
+      <div
+        style={{
+          maxWidth: '1000px',
+          margin: '10rem auto',
+          textAlign: 'center'
+        }}
+      >
+        <Grid container spacing={24}>
+          <Grid item xs={4}>
+            <Button color="success" round><Link to='/LandingPage/'>Landing Page</Link></Button>
+          </Grid>
+          <Grid item xs={4}>
+            <Button color="warning" round><Link to='/ProfilePage/'>Profile Page</Link></Button>
+          </Grid>
+          <Grid item xs={4}>
+            <Button color="rose" round><Link to='/blog/'>Blog</Link></Button>
+          </Grid>
+        </Grid>
+      </div>
+    );
+  }
 }
 
-export const pageQuery = graphql`
-  query IndexQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
-      edges {
-        node {
-          excerpt(pruneLength: 250)
-          id
-          frontmatter {
-            title
-            date(formatString: "MMMM DD, YYYY")
-            path
-          }
-        }
-      }
-    }
-  }
-`;
+export default withRoot(Index);

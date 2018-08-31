@@ -1,8 +1,8 @@
 ---
-path: "/LandingPage"
+path: "/ProfilePage"
 title: '###Your Story Starts With Us.'
 date: '2017-07-12T17:12:33.962Z'
-tags: ["LandingPage"]
+tags: ["ProfilePage"]
 ---
 
  ###Your Story Starts With Us.
