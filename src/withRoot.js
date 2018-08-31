@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import getPageContext from './getPageContext';
+
+const theme = createMuiTheme();
 
 function withRoot(Component) {
   class WithRoot extends React.Component {
@@ -26,6 +28,7 @@ function withRoot(Component) {
       return (
         <MuiThemeProvider
           sheetsManager={this.muiPageContext.sheetsManager}
+          theme={theme}
         >
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
