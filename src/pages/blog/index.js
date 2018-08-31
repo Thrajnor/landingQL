@@ -22,11 +22,12 @@ export default function Index({ data }) {
     <div className="blog-posts">
       {posts
         .filter(post => post.node.frontmatter.title.length > 0)
+        .filter(post => !post.node.frontmatter.tags)
         .map(({ node: post }) => {
           return (
             <div className="blog-post-preview" key={post.id}>
               <h1>
-                <Link to={`/blog/posts/${post.frontmatter.path}`}>{post.frontmatter.title}</Link>
+                <Link to={`/blog/posts${post.frontmatter.path}`}>{post.frontmatter.title}</Link>
               </h1>
               <h2>{post.frontmatter.date}</h2>
               <p>{post.excerpt}</p>
@@ -46,6 +47,7 @@ export const pageQuery = graphql`
           id
           frontmatter {
             title
+            tags
             date(formatString: "MMMM DD, YYYY")
             path
           }
