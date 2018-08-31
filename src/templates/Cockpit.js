@@ -7,14 +7,15 @@ import withRoot from 'withRoot';
 
 const Cockpit = ({ pageContext, data }) => {
   const { tag } = pageContext;
-  const { edges: posts } = data.allMarkdownRemark;
+  const post = data.allMarkdownRemark.edges[0].node;
+  
   if (tag === "LandingPage") {
     return (
-      <LandingPage title={posts[0].node.frontmatter.title} firstParagraph={posts[0].node.html} />
+      <LandingPage title={post.frontmatter.title} firstParagraph={post.html} />
     )
   } else if (tag === "ProfilePage") {
     return (
-      <ProfilePage/>
+      <ProfilePage image={post.frontmatter.image}/>
     )
   }
 }
@@ -57,6 +58,7 @@ export const pageQuery = graphql`
             title
             date(formatString: "MMMM DD, YYYY")
             path
+            image
           }
         }
       }
