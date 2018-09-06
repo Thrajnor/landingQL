@@ -11,11 +11,11 @@ const Cockpit = ({ pageContext, data }) => {
   
   if (tag === "LandingPage") {
     return (
-      <LandingPage title={post.frontmatter.title} firstParagraph={post.html} />
+      <LandingPage title={post.frontmatter.title} firstParagraph={post.html} desc={post.frontmatter.desc}/>
     )
   } else if (tag === "ProfilePage") {
     return (
-      <ProfilePage image={post.frontmatter.image}/>
+      <ProfilePage html={post.html} image={post.frontmatter.image} name={post.frontmatter.name} position={post.frontmatter.position}/>
     )
   }
 }
@@ -58,7 +58,8 @@ export const pageQuery = graphql`
             title
             date(formatString: "MMMM DD, YYYY")
             path
-            image
+            position
+            name
           }
         }
       }

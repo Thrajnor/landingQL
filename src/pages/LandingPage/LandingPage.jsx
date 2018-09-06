@@ -48,7 +48,7 @@ class LandingPage extends React.Component {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <h1 className={classes.title}>{this.props.title}</h1>
-                  <h4 dangerouslySetInnerHTML={{ __html: this.props.firstParagraph }}/>
+                  <h4>{this.props.desc}</h4>
                   <Button
                     color="danger"
                     size="lg"
