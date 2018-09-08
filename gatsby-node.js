@@ -1,15 +1,16 @@
 
- const path = require('path');
- const _ = require('lodash');
+const path = require('path');
+const _ = require('lodash');
 const { createFilePath } = require('gatsby-source-filesystem')
 
- exports.createPages = ({ actions, graphql }) => {
-   const { createPage } = actions;
+exports.createPages = ({ actions, graphql }) => {
+  const { createPage } = actions;
 
-   const blogPostTemplate = path.resolve("src/templates/blog-post.js");
-   const categoryTemplate = path.resolve("src/templates/Cockpit.js");
+  const blogPostTemplate = path.resolve("src/templates/blog-post.js");
+  const categoryTemplate = path.resolve("src/templates/Cockpit.js");
+  const profilePageTemplate = path.resolve("src/templates/ProfilePage.js");
 
-   return graphql(`
+  return graphql(`
      {
        allMarkdownRemark(
          sort: { order: DESC, fields: [frontmatter___date] }
@@ -23,6 +24,7 @@ const { createFilePath } = require('gatsby-source-filesystem')
              frontmatter {
                tags
                path
+               position
              }
            }
          }
@@ -31,46 +33,58 @@ const { createFilePath } = require('gatsby-source-filesystem')
    `).then(result => {
       if (result.errors) {
         return Promise.reject(result.errors);
-    }
+      }
 
-    const posts = result.data.allMarkdownRemark.edges;
+      const posts = result.data.allMarkdownRemark.edges;
 
-    _.each(posts, (post, index) => {
-      if (!_.get(post, "node.frontmatter.tags", false)) {
-        const previous = index === posts.length - 1 ? null : posts[index + 1].node;
-        const next = index === 0 ? null : posts[index - 1].node;
+      _.each(posts, (post, index) => {
+        if (!_.get(post, "node.frontmatter.tags", false) || !_.get(post, "node.frontmatter.position", false)) {
+          const previous = index === posts.length - 1 ? null : posts[index + 1].node;
+          const next = index === 0 ? null : posts[index - 1].node;
+          createPage({
+            path: post.node.fields.slug,
+            component: blogPostTemplate,
+            context: {
+              slug: post.node.fields.slug,
+              previous,
+              next,
+            }
+          });
+        }
+      });
+
+      _.each(posts, (post, index) => {
+        if (!_.get(post, "node.frontmatter.tags", false) || !_.get(post, "node.frontmatter.blog", false)) {
+          createPage({
+            path: post.node.fields.slug,
+            component: profilePageTemplate,
+            context: {
+              slug: post.node.fields.slug,
+            }
+          });
+        }
+      });
+
+      let tags = []
+
+      _.each(posts, edge => {
+        if (_.get(edge, "node.frontmatter.tags")) {
+          tags = tags.concat(edge.node.frontmatter.tags);
+        }
+      });
+
+      tags = _.uniq(tags);
+
+      tags.forEach(tag => {
         createPage({
-          path: post.node.fields.slug,
-          component: blogPostTemplate,
+          path: `/${tag}`,
+          component: categoryTemplate,
           context: {
-            slug: post.node.fields.slug,
-            previous,
-            next,
-          }
+            tag,
+          },
         });
-      }
-    });
-
-    let tags = []
-
-    _.each(posts, edge => {
-      if (_.get(edge, "node.frontmatter.tags")) {
-        tags = tags.concat(edge.node.frontmatter.tags);
-      }
-    });
-
-    tags = _.uniq(tags);
-
-    tags.forEach(tag => {
-      createPage({
-        path: `/${tag}/`,
-        component: categoryTemplate,
-        context: {
-          tag,
-        },
       });
     });
-  });
 }
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
