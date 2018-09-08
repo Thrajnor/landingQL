@@ -1,4 +1,6 @@
 import React from "react";
+
+import Link from 'gatsby-link'
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -75,7 +77,7 @@ class Header extends React.Component {
     });
     const brandComponent = (
       <Button className={classes.title}>
-        {brand}
+        <Link to='/' className={classes.title}>{brand}</Link>
       </Button>
     );
     return (
@@ -88,8 +90,8 @@ class Header extends React.Component {
                 {leftLinks}
               </Hidden>
             ) : (
-              brandComponent
-            )}
+                brandComponent
+              )}
           </div>
           <Hidden smDown implementation="css">
             {rightLinks}
