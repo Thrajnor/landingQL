@@ -31,6 +31,7 @@ import SectionDownload from "./Sections/SectionDownload.jsx";
 import componentsStyle from "assets/jss/material-kit-react/views/components.jsx";
 
 import "assets/scss/material-kit-react.scss";
+import withRoot from 'withRoot';
 
 class Components extends React.Component {
   render() {
@@ -90,4 +91,4 @@ class Components extends React.Component {
   }
 }
 
-export default withStyles(componentsStyle)(Components);
+export default withRoot(withStyles(componentsStyle)(Components));

@@ -40,7 +40,7 @@ class SectionExamples extends React.Component {
               </Link>
             </GridItem>
             <GridItem xs={12} sm={12} md={6}>
-              <Link to="../ProfilePage/ProfilePage" className={classes.link}>
+              <Link to="/ProfilePage" className={classes.link}>
                 <img
                   src={profile}
                   alt="..."

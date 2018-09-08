@@ -24,6 +24,7 @@ import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 import image from "assets/img/bg7.jpg";
 
 import "assets/scss/material-kit-react.scss";
+import withRoot from 'withRoot';
 
 
 class LoginPage extends React.Component {
@@ -37,7 +38,7 @@ class LoginPage extends React.Component {
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
-      function() {
+      function () {
         this.setState({ cardAnimaton: "" });
       }.bind(this),
       700
@@ -166,4 +167,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default withStyles(loginPageStyle)(LoginPage);
+export default withRoot(withStyles(loginPageStyle)(LoginPage));

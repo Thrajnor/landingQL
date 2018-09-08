@@ -33,6 +33,7 @@ import work5 from "assets/img/examples/clem-onojegaw.jpg";
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 
 import "assets/scss/material-kit-react.scss";
+import withRoot from 'withRoot';
 
 class ProfilePage extends React.Component {
   render() {
@@ -83,7 +84,7 @@ class ProfilePage extends React.Component {
                 </GridItem>
               </GridContainer>
               <div className={classes.description}>
-                <p dangerouslySetInnerHTML={{__html: this.props.html}}></p>
+                <p dangerouslySetInnerHTML={{ __html: this.props.html }}></p>
               </div>
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
@@ -210,4 +211,4 @@ class ProfilePage extends React.Component {
   }
 }
 
-export default withStyles(profilePageStyle)(ProfilePage);
+export default withRoot(withStyles(profilePageStyle)(ProfilePage));

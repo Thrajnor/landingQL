@@ -4,6 +4,8 @@ import classNames from "classnames";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
+import Link from 'gatsby-link'
+
 // @material-ui/icons
 
 // core components
@@ -39,17 +41,15 @@ class TeamSection extends React.Component {
                   <img src={team1} alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
-                  Gigi Hadid
+                  {this.props.team.teamName1}
                   <br />
-                  <small className={classes.smallTitle}>Model</small>
+                  <small className={classes.smallTitle}>{this.props.team.teamJob1}</small>
                 </h4>
                 <CardBody>
                   <p className={classes.description}>
-                    You can write here details about one of your team members.
-                    You can give more details about what they do. Feel free to
-                    add some <a href="#pablo">links</a> for people to be able to
-                    follow them outside the site.
+                    {this.props.team.teamDesc1}
                   </p>
+                  <Link to="/ProfilePage/Gigi">Gigi's Profile Page</Link>
                 </CardBody>
                 <CardFooter className={classes.justifyCenter}>
                   <Button
@@ -82,17 +82,15 @@ class TeamSection extends React.Component {
                   <img src={team2} alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
-                  Christian Louboutin
+                  {this.props.team.teamName2}
                   <br />
-                  <small className={classes.smallTitle}>Designer</small>
+                  <small className={classes.smallTitle}>{this.props.team.teamJob2}</small>
                 </h4>
                 <CardBody>
                   <p className={classes.description}>
-                    You can write here details about one of your team members.
-                    You can give more details about what they do. Feel free to
-                    add some <a href="#pablo">links</a> for people to be able to
-                    follow them outside the site.
+                    {this.props.team.teamDesc2}
                   </p>
+                  <Link to='/ProfilePage/Christian'>Christian's page</Link>
                 </CardBody>
                 <CardFooter className={classes.justifyCenter}>
                   <Button
@@ -118,17 +116,15 @@ class TeamSection extends React.Component {
                   <img src={team3} alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
-                  Kendall Jenner
+                  {this.props.team.teamName3}
                   <br />
-                  <small className={classes.smallTitle}>Model</small>
+                  <small className={classes.smallTitle}>{this.props.team.teamJob3}</small>
                 </h4>
                 <CardBody>
                   <p className={classes.description}>
-                    You can write here details about one of your team members.
-                    You can give more details about what they do. Feel free to
-                    add some <a href="#pablo">links</a> for people to be able to
-                    follow them outside the site.
+                    {this.props.team.teamDesc3}
                   </p>
+                  <Link to="/ProfilePage/Kendal">Kendal's Profile Page</Link>
                 </CardBody>
                 <CardFooter className={classes.justifyCenter}>
                   <Button
