@@ -7,7 +7,7 @@ import withRoot from 'withRoot';
 const Cockpit = ({ pageContext, data }) => {
   const post = data.allMarkdownRemark.edges[0].node;
   return (
-    <ProfilePage name={post.frontmatter.name} position={post.frontmatter.position} image={post.frontmatter.image} />
+    <ProfilePage name={post.frontmatter.name} position={post.frontmatter.position} image={post.frontmatter.image} html={post.frontmatter.html} />
   )
 }
 

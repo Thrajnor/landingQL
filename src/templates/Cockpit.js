@@ -10,17 +10,7 @@ const Cockpit = ({ pageContext, data }) => {
   const { tag } = pageContext;
   const post = data.allMarkdownRemark.edges[0].node;
   const product = { title: post.frontmatter.productTitle, desc: post.frontmatter.productDesc }
-  const team = {
-    teamName1: post.frontmatter.teamName1,
-    teamJob1: post.frontmatter.teamJob1,
-    teamDesc1: post.frontmatter.teamDesc1,
-    teamName2: post.frontmatter.teamName2,
-    teamJob2: post.frontmatter.teamJob2,
-    teamDesc2: post.frontmatter.teamDesc2,
-    teamName3: post.frontmatter.teamName3,
-    teamJob3: post.frontmatter.teamJob3,
-    teamDesc3: post.frontmatter.teamDesc3,
-  }
+  const team = post.frontmatter.team
 
   if (tag === "") {
     return (
@@ -48,7 +38,6 @@ Cockpit.propTypes = {
           node: PropTypes.shape({
             frontmatter: PropTypes.shape({
               path: PropTypes.string.isRequired,
-              title: PropTypes.string.isRequired,
             }),
           }),
         }).isRequired
@@ -81,15 +70,11 @@ export const pageQuery = graphql`
             image
             productTitle
             productDesc
-            teamName1
-            teamJob1
-            teamDesc1
-            teamName2
-            teamJob2
-            teamDesc2
-            teamName3
-            teamJob3
-            teamDesc3
+						team {
+              name
+              job
+              desc
+            }
           }
         }
       }

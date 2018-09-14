@@ -8,16 +8,19 @@ desc: "Every landing page needs a small description after the big bold title, th
 productTitle: "Let's talk product"
 productDesc: "This is the paragraph where you can write more details about your product. Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious, otherwise he wouldn't scroll to get here. Add a button if you want the user to see more."
 
-teamName1: "Gigi Hadid"
-teamJob1: "Model"
-teamDesc1: "You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site."
+team:
+  - name: "Gigi Hadid"
+    job: "Model"
+    desc: "You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site."
 
-teamName2: "Christian Louboutin"
-teamJob2: "Designer"
-teamDesc2: "You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site."
+  - name: "Christian Louboutin"
+    job: "Designer"
+    desc: "You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site."
 
-teamName3: "Kendall Jenner"
-teamJob3: "Model"
-teamDesc3: "You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site."
+  - name: "Kendall Jenner"
+    job: "Model"
+    desc: "You can write here details about one of your team members. You can give more details about what they do. Feel free to add some links for people to be able to follow them outside the site."
 
 ---
+
+### heading

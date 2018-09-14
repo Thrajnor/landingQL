@@ -37,7 +37,7 @@ exports.createPages = ({ actions, graphql }) => {
 
       const posts = result.data.allMarkdownRemark.edges;
 
-      _.each(posts, (post, index) => {
+     _.each(posts, (post, index) => {
         if (!_.get(post, "node.frontmatter.tags", false) || !_.get(post, "node.frontmatter.position", false)) {
           const previous = index === posts.length - 1 ? null : posts[index + 1].node;
           const next = index === 0 ? null : posts[index - 1].node;
